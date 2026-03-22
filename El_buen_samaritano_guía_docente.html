@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Docente – Misión Samaritano</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF8F0;--sand:#F5E6C8;
+  --gold:#E8A020;--gold2:#F5C842;
+  --teal:#2BBFAA;--teal2:#1A9C8A;
+  --red:#E84040;--red2:#C82020;
+  --orange:#F07820;--purple:#8060D0;
+  --green:#38B060;--dark:#2A2040;--mid:#5A4870;
+  --font-title:'Fredoka One',cursive;
+  --font-body:'Nunito',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);font-family:var(--font-body);color:var(--dark);}
+
+/* TOPBAR */
+#topbar{position:sticky;top:0;z-index:200;background:var(--dark);display:flex;align-items:center;gap:10px;padding:10px 16px;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+.t-logo{font-family:var(--font-title);color:var(--gold2);font-size:1rem;display:flex;align-items:center;gap:7px;flex:1;}
+.t-badge{background:var(--purple);color:#fff;font-size:0.65rem;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.5px;white-space:nowrap;}
+#prog-wrap{width:80px;background:rgba(255,255,255,0.15);border-radius:20px;height:6px;overflow:hidden;flex-shrink:0;}
+#prog{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold2));border-radius:20px;transition:width .4s;width:0%;}
+
+/* VERSE BAR */
+#verse-bar{background:var(--sand);padding:7px 16px;display:flex;justify-content:center;}
+.verse-pill{display:inline-flex;align-items:center;gap:7px;background:#fff;border:2px solid rgba(0,0,0,0.09);border-radius:50px;padding:6px 16px;font-family:var(--font-body);font-weight:800;font-size:0.76rem;color:var(--dark);}
+
+/* NAV TABS */
+#nav-tabs{background:var(--dark);padding:10px 14px;display:flex;flex-direction:column;gap:6px;}
+.nav-group-label{color:rgba(255,255,255,0.35);font-size:0.6rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:4px 2px 2px;}
+.nav-row{display:flex;flex-wrap:wrap;gap:6px;}
+.nav-btn{padding:6px 12px;border-radius:20px;border:none;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-family:var(--font-body);font-weight:800;font-size:0.73rem;cursor:pointer;transition:all .18s;}
+.nav-btn:hover{background:rgba(255,255,255,0.18);color:#fff;}
+.nav-btn.active{background:var(--gold2);color:var(--dark);}
+
+/* LAYOUT */
+.section{max-width:640px;margin:0 auto;padding:28px 16px 48px;}
+.section-alt-wrap{background:var(--sand);width:100%;}
+.section-alt{background:transparent;}
+
+/* HERO */
+.hero-section{background:linear-gradient(160deg,#2A2040 0%,#8060D0 60%,#2BBFAA 100%);padding:40px 20px 48px;text-align:center;color:#fff;position:relative;overflow:hidden;}
+.hero-section::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='2' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E") repeat;}
+.hero-inner{position:relative;z-index:1;max-width:480px;margin:0 auto;}
+.hero-inner h1{font-family:var(--font-title);font-size:clamp(1.9rem,7vw,2.8rem);line-height:1.15;margin-bottom:8px;}
+.hero-inner p{color:rgba(255,255,255,0.75);font-size:0.88rem;font-weight:600;line-height:1.6;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+.hero-tag{background:rgba(255,255,255,0.15);color:#fff;border-radius:50px;padding:4px 12px;font-size:0.7rem;font-weight:700;}
+
+/* CARDS */
+.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(0,0,0,0.07);border:2px solid transparent;}
+.card.teal{border-color:var(--teal);}
+.card.gold{border-color:var(--gold);}
+.card.red{border-color:var(--red);}
+.card.purple{border-color:var(--purple);}
+.card.green{border-color:var(--green);}
+.card.dark-bg{background:var(--dark);color:#fff;}
+
+/* TÍTULOS */
+.section-tag{display:inline-flex;align-items:center;gap:7px;background:var(--dark);color:var(--gold2);font-family:var(--font-title);padding:4px 14px;border-radius:60px;font-size:0.78rem;margin-bottom:8px;letter-spacing:1px;}
+.section-title{font-family:var(--font-title);font-size:clamp(1.5rem,6vw,2.1rem);line-height:1.2;margin-bottom:4px;}
+.section-sub{color:var(--mid);font-size:0.86rem;font-weight:600;margin-bottom:18px;line-height:1.6;}
+
+/* GUION */
+.script-box{background:var(--dark);color:#fff;border-radius:14px;padding:14px 16px;margin:10px 0;font-style:italic;font-size:0.86rem;line-height:1.9;}
+.script-box::before{content:'🎤 Di esto:';display:block;font-style:normal;font-weight:800;font-size:0.62rem;letter-spacing:1px;color:var(--gold2);margin-bottom:8px;text-transform:uppercase;}
+.script-box strong{color:var(--gold2);font-style:normal;}
+.script-box em{color:rgba(255,255,255,0.5);}
+
+/* STEP BOXES */
+.step-box{background:var(--sand);border-radius:12px;padding:11px 14px;margin-bottom:8px;border-left:4px solid var(--teal);}
+.step-box.gold{border-left-color:var(--gold);}
+.step-box.purple{border-left-color:var(--purple);}
+.step-box.red{border-left-color:var(--red);}
+.step-box.green{border-left-color:var(--green);}
+.step-label{font-size:0.62rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+.step-box.gold .step-label{color:#b07800;}
+.step-box.purple .step-label{color:var(--purple);}
+.step-box.red .step-label{color:var(--red2);}
+.step-box.green .step-label{color:#1a7040;}
+.step-box p{font-size:0.85rem;line-height:1.65;}
+
+/* TIP */
+.tip-box{background:#fff8e0;border-radius:12px;padding:10px 13px;border:2px solid var(--gold2);margin:10px 0;display:flex;gap:9px;align-items:flex-start;}
+.tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.tip-box p{font-size:0.81rem;font-weight:600;line-height:1.6;color:#7a5800;}
+
+/* HIGHLIGHT */
+.highlight{background:linear-gradient(135deg,#ece0ff,#d0f5ef);border-radius:14px;padding:13px 16px;border-left:4px solid var(--purple);margin:12px 0;}
+.highlight p{font-weight:700;font-size:0.85rem;line-height:1.7;}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:26px;}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:3px;background:linear-gradient(to bottom,var(--teal),var(--gold),var(--purple));border-radius:4px;}
+.tl-item{position:relative;margin-bottom:10px;background:#fff;border-radius:12px;padding:11px 14px;border:2px solid var(--sand);box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.tl-item::before{content:'';position:absolute;left:-20px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--teal);border:3px solid #fff;box-shadow:0 0 0 2px var(--teal);}
+.tl-item.gold::before{background:var(--gold);box-shadow:0 0 0 2px var(--gold);}
+.tl-item.purple::before{background:var(--purple);box-shadow:0 0 0 2px var(--purple);}
+.tl-item.red::before{background:var(--red);box-shadow:0 0 0 2px var(--red);}
+.tl-item.green::before{background:var(--green);box-shadow:0 0 0 2px var(--green);}
+.tl-time{font-size:0.62rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mid);margin-bottom:2px;}
+.tl-title{font-family:var(--font-title);font-size:0.98rem;}
+.tl-desc{font-size:0.78rem;color:var(--mid);margin-top:2px;font-weight:600;}
+
+/* NIVELES */
+.level-wrap{margin-bottom:22px;}
+.level-header{display:flex;align-items:center;gap:11px;margin-bottom:10px;}
+.level-number{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-title);font-size:1.25rem;color:#fff;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,0.2);}
+.level-number.l1{background:linear-gradient(135deg,#f0a020,#e88010);}
+.level-number.l2{background:linear-gradient(135deg,#2bbfaa,#1a9c8a);}
+.level-number.l3{background:linear-gradient(135deg,#8060d0,#6040b0);}
+.level-number.l4{background:linear-gradient(135deg,#e84040,#c82020);}
+.level-name{font-family:var(--font-title);font-size:1.05rem;}
+.level-sub{font-size:0.75rem;color:var(--mid);font-weight:700;}
+
+/* UNLOCK CHIPS */
+.unlock-sequence{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;}
+.unlock-chip{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:50px;font-family:var(--font-title);font-size:0.8rem;border:2px solid;}
+.unlock-chip.u0{background:rgba(232,160,32,0.12);border-color:var(--gold);color:#b07800;}
+.unlock-chip.u1{background:rgba(43,191,170,0.12);border-color:var(--teal);color:var(--teal2);}
+.unlock-chip.u2{background:rgba(128,96,208,0.12);border-color:var(--purple);color:var(--purple);}
+.unlock-chip.u3{background:rgba(56,176,96,0.12);border-color:var(--green);color:#1a7040;}
+
+/* ROLES */
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+.role-card{border-radius:14px;padding:12px 10px;border:2.5px solid;}
+.role-icon{font-size:1.7rem;margin-bottom:5px;}
+.role-name{font-family:var(--font-title);font-size:0.92rem;margin-bottom:3px;}
+.role-desc{font-size:0.72rem;color:var(--mid);font-weight:600;line-height:1.4;}
+.role-qs{margin-top:7px;}
+.role-q{background:rgba(255,255,255,0.7);border-radius:8px;padding:5px 8px;font-size:0.7rem;font-weight:700;margin-bottom:4px;line-height:1.4;}
+.role-card.juez{background:#ece0ff;border-color:var(--purple);}
+.role-card.heredo{background:#fdefc0;border-color:var(--gold);}
+.role-card.sam{background:#d0f5ef;border-color:var(--teal);}
+.role-card.sacerdote{background:#fde0e0;border-color:var(--red);}
+.role-card.levita{background:#ffe8d0;border-color:var(--orange);}
+.role-card.testigo{background:#d8f5e0;border-color:var(--green);}
+
+/* MATERIALES */
+.materials-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px;}
+.material-item{background:var(--sand);border-radius:11px;padding:9px 11px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:0.8rem;}
+.material-item .icon{font-size:1.2rem;flex-shrink:0;}
+
+/* OBJETIVOS */
+.obj-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px;}
+.obj-card{border-radius:14px;padding:14px 12px;}
+.obj-card .obj-icon{font-size:1.7rem;margin-bottom:5px;}
+.obj-card h4{font-family:var(--font-title);font-size:0.93rem;margin-bottom:4px;}
+.obj-card p{font-size:0.79rem;line-height:1.55;}
+.obj-card.esp{background:#ece0ff;color:#4a30a0;}
+.obj-card.emo{background:#d0f5ef;color:var(--teal2);}
+.obj-card.cog{background:#fdefc0;color:#8a5800;}
+
+/* REFLEXIÓN */
+.reflex-q{background:var(--sand);border-radius:11px;padding:11px 13px;margin-bottom:7px;border-left:4px solid var(--purple);font-weight:700;font-size:0.83rem;line-height:1.6;}
+.reflex-q span{color:var(--purple);font-family:var(--font-title);}
+
+/* ADAPTACIONES */
+.adapt-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+.adapt-card{border-radius:14px;padding:14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.07);}
+.adapt-card h3{font-family:var(--font-title);font-size:0.97rem;margin:5px 0 4px;}
+.adapt-card p{font-size:0.81rem;color:var(--mid);line-height:1.6;}
+.adapt-icon{font-size:1.6rem;}
+
+/* NUM CIRCLE */
+.num-circle{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--dark);color:var(--gold2);font-family:var(--font-title);font-size:0.82rem;flex-shrink:0;margin-right:5px;}
+
+/* DIGITAL FLOW */
+.digital-flow{display:flex;flex-direction:column;gap:0;}
+.df-step{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--sand);}
+.df-step:last-child{border-bottom:none;}
+.df-icon{font-size:1.4rem;flex-shrink:0;width:32px;text-align:center;margin-top:2px;}
+.df-content h4{font-family:var(--font-title);font-size:0.93rem;margin-bottom:3px;}
+.df-content p{font-size:0.8rem;color:var(--mid);font-weight:600;line-height:1.5;}
+
+/* CIERRE */
+.final-reto{background:linear-gradient(135deg,var(--dark),var(--mid));color:#fff;border-radius:22px;padding:26px 18px;text-align:center;}
+.final-reto h2{font-family:var(--font-title);font-size:1.5rem;color:var(--gold2);margin-bottom:5px;}
+.final-reto .frase{font-family:var(--font-title);font-size:1.2rem;color:var(--teal);margin:16px 0 10px;line-height:1.3;}
+.reto-pasos{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px;}
+.reto-paso{background:rgba(255,255,255,0.09);border-radius:11px;padding:11px;}
+.reto-paso .rp-num{font-family:var(--font-title);font-size:1.6rem;color:var(--gold2);}
+.reto-paso .rp-text{font-size:0.82rem;margin-top:3px;line-height:1.5;}
+
+/* CHECKLIST */
+.check-list{list-style:none;}
+.check-list li{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--sand);font-size:0.83rem;font-weight:600;}
+.check-list li:last-child{border-bottom:none;}
+.check-list li::before{content:'✓';display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:50%;background:var(--teal);color:#fff;font-size:0.58rem;font-weight:900;flex-shrink:0;margin-top:2px;}
+
+/* DIVIDER */
+.divider{height:3px;border-radius:2px;margin:20px 0;background:linear-gradient(90deg,var(--teal),var(--purple),var(--gold));opacity:.22;}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,0.4);text-align:center;padding:22px 16px;font-size:0.76rem;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="t-logo">
+    <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.5 13C8.5 13 1 8.5 1 4C1 2.2 2.3 1 4.2 1.3C5.6 1.5 7 2.4 8.5 3.8C10 2.4 11.4 1.5 12.8 1.3C14.7 1 16 2.2 16 4C16 8.5 8.5 13 8.5 13Z" fill="#F5C842"/>
+    </svg>
+    Semilleros Gosén
+    <span class="t-badge">DOCENTE</span>
+  </div>
+  <div id="prog-wrap"><div id="prog"></div></div>
+</div>
+
+<!-- VERSE BAR -->
+<div id="verse-bar">
+  <span class="verse-pill">
+    <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 9.5C6 9.5 1 6.5 1 3.5C1 2 2 1 3.5 1.2C4.4 1.4 5.3 2 6 2.9C6.7 2 7.6 1.4 8.5 1.2C10 1 11 2 11 3.5C11 6.5 6 9.5 6 9.5Z" fill="#E84040"/>
+    </svg>
+    "Ama a tu prójimo como a ti mismo" — Lucas 10:27
+  </span>
+</div>
+
+<!-- MENÚ DE NAVEGACIÓN HORIZONTAL -->
+<div id="nav-tabs">
+  <div class="nav-group-label">Preparación</div>
+  <div class="nav-row">
+    <button class="nav-btn active" onclick="goTo('s-objetivos')">🎯 Objetivos</button>
+    <button class="nav-btn" onclick="goTo('s-materiales')">🧰 Materiales</button>
+    <button class="nav-btn" onclick="goTo('s-estructura')">⏱ Estructura</button>
+  </div>
+  <div class="nav-group-label">Clase</div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goTo('s-narrativa')">🗺 Narrativa</button>
+    <button class="nav-btn" onclick="goTo('s-escape')">🔐 Escape Room</button>
+    <button class="nav-btn" onclick="goTo('s-digital')">💻 Digital</button>
+    <button class="nav-btn" onclick="goTo('s-juicio')">⚖️ Juicio</button>
+  </div>
+  <div class="nav-group-label">Cierre</div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goTo('s-participacion')">🙋 Participación</button>
+    <button class="nav-btn" onclick="goTo('s-cierre')">🌟 Cierre</button>
+    <button class="nav-btn" onclick="goTo('s-adaptaciones')">🔧 Adaptaciones</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero-section">
+  <div class="hero-inner">
+    <svg width="52" height="48" viewBox="0 0 52 48" fill="none" style="margin-bottom:10px" xmlns="http://www.w3.org/2000/svg">
+      <path d="M26 44C26 44 2 30 2 13C2 6 7.5 1 14 2.5C18.2 3.4 22 6.2 26 10.5C30 6.2 33.8 3.4 38 2.5C44.5 1 50 6 50 13C50 30 26 44 26 44Z" fill="white" opacity="0.92"/>
+    </svg>
+    <h1>Guía del Docente</h1>
+    <p>El Buen Samaritano · Lucas 10:25-37<br>Todo lo que necesitas para liderar la experiencia</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🎤 Guion completo</span>
+      <span class="hero-tag">💻 100% digital</span>
+      <span class="hero-tag">⏱ 75 minutos</span>
+      <span class="hero-tag">📱 Optimizada para celular</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ OBJETIVOS ═══════════════════ -->
+<div class="section" id="s-objetivos">
+  <div class="section-tag">🎯 Antes de comenzar</div>
+  <h2 class="section-title">Objetivos</h2>
+  <p class="section-sub">Tu brújula para toda la clase. Tenlos claros desde el principio.</p>
+  <div class="obj-grid">
+    <div class="obj-card esp"><div class="obj-icon">✝️</div><h4>Espirituales</h4><p>Comprender que amar al prójimo es un mandamiento de Jesús. El prójimo es <em>cualquier</em> persona, incluso los difíciles de amar.</p></div>
+    <div class="obj-card emo"><div class="obj-icon">💚</div><h4>Emocionales</h4><p>Desarrollar empatía activa. Sentir lo que siente quien necesita ayuda. Querer ser agente de misericordia esta semana.</p></div>
+    <div class="obj-card cog"><div class="obj-icon">🧠</div><h4>Cognitivos</h4><p>Narrar la parábola con sus palabras. Identificar los 3 personajes clave. Memorizar Lucas 10:27.</p></div>
+  </div>
+  <div class="highlight" style="margin-top:14px;"><p>💡 <strong>Tu rol hoy:</strong> Eres el <em>Game Master</em>. No solo enseñas — guías una aventura. Habla con entusiasmo, usa pausas dramáticas y celebra cada logro. Tu energía contagia a los niños.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ MATERIALES ═══════════════════ -->
+<div class="section" id="s-materiales">
+  <div class="section-tag">🧰 Preparación</div>
+  <h2 class="section-title">Materiales</h2>
+  <p class="section-sub">Todo es digital. No necesitas imprimir nada, ni preparar sobres, ni puzzle físico.</p>
+  <div class="card gold">
+    <div class="materials-grid">
+      <div class="material-item"><div class="icon">💻</div>Pantalla o proyector para los niños</div>
+      <div class="material-item"><div class="icon">📱</div>Tu celular con esta guía abierta</div>
+      <div class="material-item"><div class="icon">🩹</div>Vendas o tiras de tela (Nivel 2)</div>
+      <div class="material-item"><div class="icon">🎭</div>Pañuelos para disfraces del juicio</div>
+      <div class="material-item"><div class="icon">⭐</div>Calcomanías o sellos de estrellas</div>
+      <div class="material-item"><div class="icon">🔦</div>Linterna pequeña (intro)</div>
+      <div class="material-item"><div class="icon">🎵</div>Bocina o parlante para música</div>
+      <div class="material-item"><div class="icon">🖊️</div>Papel y lápiz para el ritual final</div>
+    </div>
+  </div>
+  <div class="tip-box"><div class="tip-icon">💡</div><p>Abre el archivo <strong>samaritano_proyeccion_ninos.html</strong> en el navegador de la pantalla grande antes de que lleguen los niños. Tú navegas desde la pantalla o desde tu celular.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ ESTRUCTURA ═══════════════════ -->
+<div class="section-alt-wrap"><div class="section" id="s-estructura">
+  <div class="section-tag">⏱ Mapa del tiempo</div>
+  <h2 class="section-title">Estructura general</h2>
+  <p class="section-sub">Duración total: <strong>75 minutos</strong>. Tres actos encadenados sin cortes bruscos.</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-time">min 0–5</div><div class="tl-title">⚡ Activación: ¡El llamado!</div><div class="tl-desc">Intro dramática con linterna + división de equipos</div></div>
+    <div class="tl-item gold"><div class="tl-time">min 5–10</div><div class="tl-title">🗺 Narrativa: El Camino de Jericó</div><div class="tl-desc">Historia que conecta toda la experiencia</div></div>
+    <div class="tl-item"><div class="tl-time">min 10–40</div><div class="tl-title">🔐 Acto 1: Escape Room (4 niveles)</div><div class="tl-desc">Retos físicos, lógicos y de decisión · 30 min</div></div>
+    <div class="tl-item purple"><div class="tl-time">min 40–55</div><div class="tl-title">💻 Acto 2: Videojuego de las Decisiones</div><div class="tl-desc">Experiencia digital interactiva · 15 min</div></div>
+    <div class="tl-item red"><div class="tl-time">min 55–68</div><div class="tl-title">⚖️ Acto 3: El Gran Juicio del Camino</div><div class="tl-desc">Roles + reflexión guiada · 13 min</div></div>
+    <div class="tl-item green"><div class="tl-time">min 68–75</div><div class="tl-title">🌟 Cierre: La Promesa del Héroe</div><div class="tl-desc">Ritual + reto semanal + versículo · 7 min</div></div>
+  </div>
+</div>
+</div><!-- end section-alt-wrap -->
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ NARRATIVA ═══════════════════ -->
+<div class="section" id="s-narrativa">
+  <div class="section-tag">🗺 Narrativa</div>
+  <h2 class="section-title">Guion de introducción</h2>
+  <p class="section-sub">Los primeros 5 minutos son los más importantes. Engancha desde el segundo uno.</p>
+
+  <div class="card purple">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:8px;">🌍 El universo de la misión</h3>
+    <p style="font-size:0.85rem;line-height:1.8;">Los niños son <strong>"Agentes del Amor"</strong> de la <strong>O.M.A.</strong> (Operación Misericordia Activa). Llegó una alerta: alguien está herido en el Camino de Jericó y nadie lo ayuda. Deben superar 4 niveles para convertirse en <strong>verdaderos Samaritanos</strong>.</p>
+  </div>
+
+  <div class="card red">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">⚡ Guion de apertura (min 0–5)</h3>
+    <div class="step-box gold"><div class="step-label">Setup antes de empezar</div><p>Apaga las luces o baja las persianas. Ten la linterna en la mano. Pon música de suspenso instrumental de fondo.</p></div>
+    <div class="script-box">
+      <em>[Entras en silencio. Enciendes la linterna. Esperas 5 segundos mirando a los niños.]</em><br><br>
+      «Agentes... necesito su atención. Esta mañana llegó una misión URGENTE.»<br><br>
+      <em>[Pausa. Voz seria.]</em><br><br>
+      «"En el camino de Jericó a Jerusalén, un hombre fue atacado. Está herido, solo, y tres personas ya pasaron sin ayudarlo. ¿Habrá alguien valiente que haga lo correcto?" — Firmado: El Maestro Jesús.»<br><br>
+      <em>[Miras a los niños uno por uno.]</em><br><br>
+      «¿Están listos para ser <strong>Agentes del Amor</strong>? ¡Esta misión comienza... AHORA!»
+    </div>
+    <div class="tip-box"><div class="tip-icon">🎬</div><p>Pon un golpe de música dramático justo en "AHORA". El efecto es muy memorable.</p></div>
+  </div>
+
+  <div class="card teal">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">🔗 Frases de transición entre actos</h3>
+    <div class="step-box"><div class="step-label">Escape Room → Digital (min ~40)</div><p>«¡Excelentes, Agentes! Superaron el camino... pero la misión tiene una prueba más: ¿tomarán las decisiones correctas cuando nadie los mire? Pasen a la pantalla de entrenamiento.»</p></div>
+    <div class="step-box gold"><div class="step-label">Digital → Juicio (min ~55)</div><p>«Ahora que conocen la historia por dentro, es hora de hacer justicia. ¿Por qué el sacerdote y el levita siguieron de largo? ¡Vamos al Gran Juicio del Camino!»</p></div>
+    <div class="step-box green"><div class="step-label">Juicio → Cierre (min ~68)</div><p>«Han sido jueces, testigos y defensores. Ahora viene la pregunta más importante: ¿tú qué vas a hacer esta semana?»</p></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ ESCAPE ROOM ═══════════════════ -->
+<div class="section-alt-wrap"><div class="section" id="s-escape">
+  <div class="section-tag">🔐 Acto 1</div>
+  <h2 class="section-title">Escape Room</h2>
+  <p class="section-sub">4 niveles · 30 minutos · Cada nivel desbloquea una palabra del versículo en la pantalla</p>
+
+  <div class="highlight"><p>📌 <strong>Organización:</strong> 2–4 equipos de 3–5 niños. Nombres: Sansón, Moisés, Ester, David. Al superar cada nivel, pulsas el botón en la pantalla y aparece una palabra nueva del versículo.</p></div>
+
+  <div class="card dark-bg" style="margin-bottom:18px;">
+    <p style="font-size:0.7rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);margin-bottom:9px;">Cómo se desbloquea el versículo en pantalla:</p>
+    <div class="unlock-sequence">
+      <div class="unlock-chip u0">Nivel 1 → "Ama"</div>
+      <div class="unlock-chip u1">Nivel 2 → "a tu"</div>
+      <div class="unlock-chip u2">Nivel 3 → "prójimo"</div>
+      <div class="unlock-chip u3">Nivel 4 → "como a ti mismo"</div>
+    </div>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:8px;font-weight:600;">En la pantalla de proyección ve al Nivel 4 y pulsa el botón del nivel completado. La palabra aparece animada para todos.</p>
+  </div>
+
+  <!-- N1 -->
+  <div class="level-wrap">
+    <div class="level-header">
+      <div class="level-number l1">1</div>
+      <div><div class="level-name">🏔 El Camino Peligroso</div><div class="level-sub">Reto físico · 7 min · Trabajo en equipo</div></div>
+    </div>
+    <div class="step-box"><div class="step-label">Qué hacen los niños</div><p>Cruzar el salón tomados de la mano sin pisar círculos rojos marcados con cinta en el piso. Si alguien pisa, todo el equipo vuelve al inicio.</p></div>
+    <div class="step-box gold"><div class="step-label">Setup previo</div><p>Marca en el piso: línea de inicio, 6–8 círculos rojos al azar, línea de llegada. Distancia: 4–5 metros. Puedes usar el temporizador de la proyección.</p></div>
+    <div class="script-box">«Este es el Camino de Jericó. Está lleno de trampas. Solo pueden cruzar si van <strong>juntos</strong> y se cuidan. ¡Nadie se queda atrás! Cuando escuchen el silbato... ¡empiecen!»</div>
+    <div class="step-box green"><div class="step-label">¿Superan el reto?</div><p>Todo el equipo llega sin pisar más de 2 círculos. → Pulsa <strong>"✅ Nivel 1 completado"</strong> en la proyección. Aparece <strong>"Ama"</strong>. + 1 estrella por niño.</p></div>
+    <div class="tip-box"><div class="tip-icon">🎵</div><p>Pon música de aventura de fondo. Para niños con dificultades motoras: crea un camino alternativo sin círculos.</p></div>
+  </div>
+
+  <!-- N2 -->
+  <div class="level-wrap">
+    <div class="level-header">
+      <div class="level-number l2">2</div>
+      <div><div class="level-name">🩹 El Herido del Camino</div><div class="level-sub">Reto de empatía · 7 min</div></div>
+    </div>
+    <div class="step-box"><div class="step-label">Qué hacen los niños</div><p>Un niño actúa de "herido" (sentado, ojos cerrados, no puede moverse). El resto debe: vendarlo con tiras de tela, darle agua (mímica), y cargarlo hasta la "posada" (una silla marcada a 3–4 metros).</p></div>
+    <div class="step-box gold"><div class="step-label">Setup previo</div><p>Tiras de tela, botella de agua de prop, silla marcada como "La Posada". Tiempo límite: <strong>5 minutos</strong>. Cuenta los últimos 10 segundos en voz alta. Usa el temporizador de la proyección (Nivel 2).</p></div>
+    <div class="script-box">«¡Encontraron al hombre herido! Miren... solo, en el piso. <strong>USTEDES son el samaritano ahora.</strong> Tienen 5 minutos: véndalo, denle agua, llévelo a un lugar seguro. ¡El tiempo corre!»</div>
+    <div class="step-box green"><div class="step-label">¿Superan el reto?</div><p>Completan los 3 pasos antes del tiempo. Evalúa también la actitud: ¿lo hicieron con cuidado? → Pulsa <strong>"✅ Nivel 2 completado"</strong>. Aparece <strong>"a tu"</strong>. + 1 estrella.</p></div>
+  </div>
+
+  <!-- N3 -->
+  <div class="level-wrap">
+    <div class="level-header">
+      <div class="level-number l3">3</div>
+      <div><div class="level-name">🧩 El Código Secreto</div><div class="level-sub">Reto lógico · 8 min · Decisiones grupales</div></div>
+    </div>
+    <div class="step-box"><div class="step-label">Qué hacen los niños</div><p>Escuchan 5 situaciones (tú las lees en voz alta o las proyectas). Los equipos discuten y ordenan cuál es la más y la menos misericordiosa. Luego comparten y debaten su orden.</p></div>
+    <div class="step-box gold">
+      <div class="step-label">Las 5 situaciones (léelas en voz alta)</div>
+      <p>🔴 <strong>A:</strong> "Pasas de largo porque llegas tarde a la iglesia."<br>
+      🟠 <strong>B:</strong> "Te detienes, miras, pero sigues porque tienes miedo."<br>
+      🟡 <strong>C:</strong> "Llamas a alguien más para que ayude y esperas con el herido."<br>
+      🟢 <strong>D:</strong> "Lo ayudas, pero solo si es tu amigo."<br>
+      💚 <strong>E:</strong> "Lo ayudas aunque sea tu enemigo y te cueste tiempo."</p>
+    </div>
+    <div class="script-box">«Tienen estas 5 situaciones. Discutan: ¿cuál se parece más a lo que haría Jesús? <strong>¿Qué haría el buen samaritano?</strong>»</div>
+    <div class="step-box green"><div class="step-label">¿Superan el reto?</div><p>Orden esperado: A → B → D → C → E. Aciertan al menos 3 de 5. → Pulsa <strong>"✅ Nivel 3 completado"</strong>. Aparece <strong>"prójimo"</strong>.</p></div>
+    <div class="tip-box"><div class="tip-icon">💡</div><p>Este nivel genera la conversación más rica. ¡Deja que debatan! Tus preguntas clave: «¿Por qué creen eso?» y «¿Qué dirían si fueran el herido?»</p></div>
+  </div>
+
+  <!-- N4 -->
+  <div class="level-wrap">
+    <div class="level-header">
+      <div class="level-number l4">4</div>
+      <div><div class="level-name">🔑 La Llave de la Posada</div><div class="level-sub">Reto colaborativo · 8 min · Todos juntos</div></div>
+    </div>
+    <div class="step-box"><div class="step-label">Qué ven los niños en pantalla</div><p>Las 3 palabras desbloqueadas y la última todavía bloqueada con candado 🔒. Deben responder la pregunta final para desbloquearla.</p></div>
+    <div class="step-box gold"><div class="step-label">La pregunta que haces en voz alta</div><p>«¿Quién fue el verdadero prójimo del hombre herido?» — Respuesta: <strong>El que mostró misericordia</strong>. Cuando lo digan, pulsa <strong>"✅ ¡Respondieron correcto!"</strong> en la proyección.</p></div>
+    <div class="script-box">
+      «En pantalla ven el mensaje que construyeron juntos nivel por nivel... pero falta la última palabra. Solo la desbloquean si responden: <strong>¿quién fue el verdadero prójimo?</strong>»<br><br>
+      <em>[Cuando responden y el versículo completo aparece animado en pantalla:]</em><br><br>
+      «¡ESO ES! <strong>"Ama a tu prójimo como a ti mismo."</strong> ¡Lucas 10:27! ¡Son oficialmente Agentes del Amor certificados!»
+    </div>
+    <div class="step-box green"><div class="step-label">Evaluación</div><p>Todos pasan. El versículo aparece completo y animado para todos. No hay equipo perdedor en este nivel.</p></div>
+    <div class="tip-box"><div class="tip-icon">💡</div><p>Hazlo dramático: «Hay una última palabra bloqueada... ¿quién tiene el código?» y espera que alguien grite la respuesta.</p></div>
+  </div>
+</div>
+</div><!-- end section-alt-wrap -->
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ DIGITAL ═══════════════════ -->
+<div class="section" id="s-digital">
+  <div class="section-tag">💻 Acto 2</div>
+  <h2 class="section-title">Videojuego de las Decisiones</h2>
+  <p class="section-sub">Proyecta <strong>samaritano_proyeccion_ninos.html</strong>. Tú navegas, los niños votan a mano alzada.</p>
+
+  <div class="card purple">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:12px;">🎮 Flujo de las 3 escenas</h3>
+    <div class="digital-flow">
+      <div class="df-step"><div class="df-icon">😱</div><div class="df-content"><h4>Escena 1 — El herido</h4><p>4 opciones de decisión. Los niños votan a mano alzada, tú seleccionas la ganadora. Antes de avanzar: «¿Por qué eligieron eso?»</p></div></div>
+      <div class="df-step"><div class="df-icon">😬</div><div class="df-content"><h4>Escena 2 — Es tu enemigo</h4><p>La más difícil. Da tiempo extra de debate. Pregunta: «¿Les costaría ayudar a alguien que les hizo daño?»</p></div></div>
+      <div class="df-step"><div class="df-icon">💰</div><div class="df-content"><h4>Escena 3 — El dinero</h4><p>«¿Cuánto estamos dispuestos a dar? El samaritano fue más allá de lo esperado.»</p></div></div>
+      <div class="df-step"><div class="df-icon">🏆</div><div class="df-content"><h4>Final (A o B)</h4><p>Sea cual sea: «¿Creen que esto puede cambiar? ¿Qué necesitamos para actuar diferente?»</p></div></div>
+      <div class="df-step"><div class="df-icon">⚡</div><div class="df-content"><h4>Quiz relámpago (opcional)</h4><p>5 preguntas. El equipo que levanta la mano primero y responde correcto gana una estrella.</p></div></div>
+    </div>
+  </div>
+  <div class="tip-box"><div class="tip-icon">💡</div><p>Las decisiones "malas" no son castigo — son oportunidad. Usa siempre las respuestas incorrectas para reflexionar: «¿Cómo se sentiría el herido si eligiéramos eso?»</p></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ JUICIO ═══════════════════ -->
+<div class="section-alt-wrap"><div class="section" id="s-juicio">
+  <div class="section-tag">⚖️ Acto 3</div>
+  <h2 class="section-title">El Gran Juicio del Camino</h2>
+  <p class="section-sub">13 minutos · Reorganiza el espacio como tribunal antes de empezar</p>
+
+  <div class="highlight"><p>📌 <strong>Setup:</strong> Una silla al frente para los "acusados". Tú moderas. Los niños eligen su rol tocando el personaje en la pantalla de proyección — allí aparecen sus preguntas.</p></div>
+
+  <div class="roles-grid">
+    <div class="role-card juez"><div class="role-icon">👨‍⚖️</div><div class="role-name">El Juez</div><div class="role-desc">Dirige y da la palabra.</div><div class="role-qs"><div class="role-q">¿Qué dicen las partes?</div><div class="role-q">¿Qué haría Jesús hoy?</div></div></div>
+    <div class="role-card heredo"><div class="role-icon">🤕</div><div class="role-name">El Herido</div><div class="role-desc">Cuenta cómo se sintió.</div><div class="role-qs"><div class="role-q">¿Qué sentiste cuando te ignoraron?</div><div class="role-q">¿Qué cambió cuando llegó el samaritano?</div></div></div>
+    <div class="role-card sam"><div class="role-icon">💚</div><div class="role-name">Samaritano</div><div class="role-desc">Explica por qué ayudó.</div><div class="role-qs"><div class="role-q">¿Por qué decidiste parar?</div><div class="role-q">¿Te costó? ¿Valió la pena?</div></div></div>
+    <div class="role-card sacerdote"><div class="role-icon">📜</div><div class="role-name">Sacerdote</div><div class="role-desc">Defiende su decisión.</div><div class="role-qs"><div class="role-q">¿Por qué no ayudaste?</div><div class="role-q">¿Crees que Dios entendió?</div></div></div>
+    <div class="role-card levita"><div class="role-icon">🎭</div><div class="role-name">El Levita</div><div class="role-desc">¿Miedo? ¿Prisa?</div><div class="role-qs"><div class="role-q">¿Qué pensaste al verlo?</div><div class="role-q">¿Lo harías diferente hoy?</div></div></div>
+    <div class="role-card testigo"><div class="role-icon">👁️</div><div class="role-name">Testigos</div><div class="role-desc">Preguntan y votan al final.</div><div class="role-qs"><div class="role-q">¿Tú qué habrías hecho?</div><div class="role-q">¿Fue justo lo que pasó?</div></div></div>
+  </div>
+
+  <div class="card red" style="margin-top:14px;">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">📋 Paso a paso</h3>
+    <div class="step-box"><div class="step-label"><span class="num-circle">1</span> 2 min — Roles</div><p>Extrovertidos: juez, samaritano, sacerdote. Tímidos: testigos. 60 seg para "entrar en personaje".</p></div>
+    <div class="step-box gold"><div class="step-label"><span class="num-circle">2</span> 3 min — Apertura</div><p>El juez abre: «Se juzga si el sacerdote y el levita hicieron lo correcto. ¡Que empiece el juicio!»</p></div>
+    <div class="step-box"><div class="step-label"><span class="num-circle">3</span> 4 min — Hablan los personajes</div><p>Cada uno 30–45 seg. Orden: herido → sacerdote → levita → samaritano. Testigos: máx 1 pregunta cada uno.</p></div>
+    <div class="step-box purple"><div class="step-label"><span class="num-circle">4</span> 2 min — Votación</div><p>Testigos votan a mano alzada: «¿Quién tiene razón?» Debate breve.</p></div>
+    <div class="step-box green"><div class="step-label"><span class="num-circle">5</span> 2 min — Tú cierras</div></div>
+    <div class="script-box">«El Juez más importante ya habló. Jesús no preguntó "¿quién <em>merece</em> ser ayudado?". Preguntó: <strong>"¿Cuál de los tres fue el prójimo?"</strong> — El que mostró misericordia. Eso somos llamados a ser: personas que muestran misericordia a TODOS.»</div>
+  </div>
+
+  <div class="card teal" style="margin-top:12px;">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">💭 Preguntas de reflexión</h3>
+    <div class="reflex-q"><span>❓</span> ¿Quién en tu vida podría ser tu "herido del camino"?</div>
+    <div class="reflex-q"><span>❓</span> ¿Alguna vez fuiste el sacerdote o el levita sin darte cuenta?</div>
+    <div class="reflex-q"><span>❓</span> ¿Qué te costaría ser el samaritano esta semana?</div>
+    <div class="reflex-q"><span>❓</span> ¿En qué se parece Jesús al samaritano?</div>
+    <div class="tip-box" style="margin-top:10px;"><div class="tip-icon">💡</div><p>No presiones para que respondan en voz alta. Puedes pedir que lo escriban o dibujen. Algunas reflexiones son íntimas.</p></div>
+  </div>
+</div>
+</div><!-- end section-alt-wrap -->
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ PARTICIPACIÓN ═══════════════════ -->
+<div class="section" id="s-participacion">
+  <div class="section-tag">🙋 Todos adentro</div>
+  <h2 class="section-title">Participación activa</h2>
+  <p class="section-sub">Para que ningún niño quede fuera de la experiencia.</p>
+  <div class="card teal"><h3 style="font-family:var(--font-title);margin-bottom:6px;">👥 Grupos</h3><p style="font-size:0.84rem;line-height:1.7;">Forma grupos por energía, no por amistad. 3–5 por grupo. Asigna un Capitán que rota cada actividad.</p></div>
+  <div class="card gold"><h3 style="font-family:var(--font-title);margin-bottom:6px;">⚡ Manejo de energía</h3><p style="font-size:0.84rem;line-height:1.7;">Energía baja: 60 seg saltando. Energía muy alta: "Código Azul" — todos sientan, 3 respiraciones. Funciona siempre.</p></div>
+  <div class="card purple"><h3 style="font-family:var(--font-title);margin-bottom:6px;">🎯 Los más tímidos</h3><p style="font-size:0.84rem;line-height:1.7;">"Testigo silencioso": escriben en papel y leen al final. Valida siempre: «¡Gracias, eso es muy importante!»</p></div>
+  <div class="card green"><h3 style="font-family:var(--font-title);margin-bottom:6px;">🔥 Los más inquietos</h3><p style="font-size:0.84rem;line-height:1.7;">Roles protagonistas: el herido en el Nivel 2, el juez en el juicio. Necesitan moverse y ser vistos.</p></div>
+  <div class="card red"><h3 style="font-family:var(--font-title);margin-bottom:6px;">🌈 Inclusión</h3><p style="font-size:0.84rem;line-height:1.7;">Nunca preguntes "¿alguien quiere responder?" — pregunta directamente con preguntas que todos puedan contestar.</p></div>
+  <div class="card teal"><h3 style="font-family:var(--font-title);margin-bottom:6px;">⭐ Estrellas</h3><p style="font-size:0.84rem;line-height:1.7;">Se ganan por: participar, ayudar a un compañero, responder correcto, dar un abrazo. Meta: todos terminan con al menos 3.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ CIERRE ═══════════════════ -->
+<div class="section-alt-wrap"><div class="section" id="s-cierre">
+  <div class="section-tag">🌟 El gran final</div>
+  <h2 class="section-title">Cierre impactante</h2>
+  <p class="section-sub">Los últimos 7 minutos son los más importantes. Son lo que llevarán en el corazón.</p>
+
+  <div class="card purple">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">🖐 Ritual: La Mano del Samaritano (3 min)</h3>
+    <div class="step-box"><div class="step-label">Qué hacen</div><p>Cada niño traza su mano en papel y escribe dentro una acción específica que hará esta semana. Ejemplo: "Voy a compartir mi recreo con el niño que siempre está solo."</p></div>
+    <div class="script-box">«Esta mano es tu promesa. No a tus compañeros, no a mí. Es tu promesa a <strong>Jesús</strong>. Y Él te promete que te ayudará a cumplirla. Llévala contigo esta semana.»</div>
+  </div>
+
+  <div class="final-reto">
+    <h2>Reto de la semana</h2>
+    <div class="reto-pasos">
+      <div class="reto-paso"><div class="rp-num">1</div><div class="rp-text">Identifica a alguien que necesite ayuda y <strong>ayúdalo aunque te cueste.</strong></div></div>
+      <div class="reto-paso"><div class="rp-num">2</div><div class="rp-text">Muéstrale misericordia a alguien difícil. <strong>Da el primer paso tú.</strong></div></div>
+      <div class="reto-paso"><div class="rp-num">3</div><div class="rp-text">Reza cada día: <em>"Jesús, ayúdame a ver a mis prójimos y a ayudarlos."</em></div></div>
+    </div>
+    <div class="frase">"Ama a tu prójimo como a ti mismo"<br><span style="font-size:0.85rem;color:rgba(255,255,255,0.5);font-family:var(--font-body)">— Lucas 10:27</span></div>
+    <p style="font-size:0.76rem;color:rgba(255,255,255,0.4);margin-top:8px;">Repite 3 veces con los niños, en voz alta y de pie.</p>
+  </div>
+
+  <div class="card teal" style="margin-top:14px;">
+    <h3 style="font-family:var(--font-title);font-size:1.05rem;margin-bottom:10px;">🙏 Oración de cierre</h3>
+    <div class="script-box">«Repitan en voz baja lo que yo diga. ¿Listos?»<br><br>«Jesús... / gracias porque tú eres el mejor samaritano / tú nos ayudaste cuando estábamos perdidos / ayúdame esta semana / a ver a los que nadie ve / y a amar a los que son difíciles de amar / porque con tu ayuda... / ¡yo sí puedo! / Amén.»</div>
+  </div>
+</div>
+</div><!-- end section-alt-wrap -->
+
+<div class="divider"></div>
+
+<!-- ═══════════════════ ADAPTACIONES ═══════════════════ -->
+<div class="section" id="s-adaptaciones">
+  <div class="section-tag">🔧 Plan B, C y D</div>
+  <h2 class="section-title">Adaptaciones</h2>
+  <p class="section-sub">Para que la experiencia funcione sin importar el contexto del día.</p>
+  <div class="adapt-grid">
+    <div class="adapt-card"><div class="adapt-icon">👶</div><h3>Pocos niños (3–6)</h3><p>Un solo equipo. El docente toma un rol en el juicio. Escape room con tiempo extendido. Quiz en voz alta sin equipos.</p></div>
+    <div class="adapt-card"><div class="adapt-icon">🎉</div><h3>Muchos niños (20+)</h3><p>4–6 equipos. Niveles 1 y 2 en zonas simultáneas. Juicio con 1 representante por rol. Apóyate en un co-docente.</p></div>
+    <div class="adapt-card"><div class="adapt-icon">⏰</div><h3>Poco tiempo (40 min)</h3><p>Solo Niveles 1 y 3 (15 min), videojuego (10 min), cierre directo (15 min). Omite el juicio de roles.</p></div>
+    <div class="adapt-card"><div class="adapt-icon">📵</div><h3>Sin proyector</h3><p>Lee las situaciones del Nivel 3 en voz alta. Para el Nivel 4, escribe el versículo en el tablero letra por letra conforme avanzan.</p></div>
+    <div class="adapt-card"><div class="adapt-icon">🏠</div><h3>Espacio pequeño</h3><p>El Nivel 1 se hace en círculo. El "herido" del Nivel 2 puede ser un muñeco o peluche si el espacio no lo permite.</p></div>
+    <div class="adapt-card"><div class="adapt-icon">🌧️</div><h3>Día de baja energía</h3><p>Empieza con el Quiz Relámpago. Orden: digital → reflexión → escape simplificado. Siempre termina con el ritual de la mano.</p></div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:var(--font-title);font-size:0.95rem;color:var(--gold2);margin-bottom:5px;">Guía Docente — Misión Samaritano</div>
+  <p>Semilleros · Iglesia Gosén · Lucas 10:25-37</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const pct = Math.min(Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100), 100);
+  document.getElementById('prog').style.width = pct + '%';
+
+  const secs = [
+    'objetivos','materiales','estructura','narrativa',
+    'escape','digital','juicio','participacion','cierre','adaptaciones'
+  ];
+  let active = '';
+  secs.forEach(s => {
+    const el = document.getElementById('s-' + s);
+    if (el && el.getBoundingClientRect().top < 140) active = s;
+  });
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('s-' + active)) {
+      b.classList.add('active');
+    }
+  });
+});
+
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
